@@ -1,76 +1,119 @@
 # TutorLink
 
-TutorLink is a custom-built tutoring platform that allows students to easily schedule tutoring sessions and make secure online payments. The platform provides a streamlined, user-friendly interface where users can view tutor availability in real-time, book sessions, and receive automated confirmations. Integrated with Stripe for secure payments and Google Calendar for scheduling, TutorLink ensures a seamless experience for both tutors and students.
+TutorLink is a custom-built tutoring platform that allows students to easily schedule tutoring sessions and make secure online payments. The platform provides a streamlined, user-friendly interface where users can view tutor availability in real-time, book sessions, and receive automated confirmations. Integrated with Stripe for secure payments and Calendly for scheduling, TutorLink ensures a seamless experience for both tutors and students.
 
 ## Table of Contents
 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
+- [Usage](#usage)
 - [License](#license)
 - [Contact](#contact)
 
 ## Features
 
-- **Online Scheduling**: Real-time session booking integrated with Google Calendar API to sync tutor availability and student appointments.
-- **Secure Payment Processing**: Integrated Stripe API for secure online payments, including one-time and package-based payments.
-- **User Management**: Account creation and profile management for both tutors and students, allowing personalized user experiences.
+- **Online Scheduling**: Real-time session booking integrated with Calendly for syncing tutor availability and student appointments.
+- **Secure Payment Processing**: Integrated Stripe API for secure online payments.
+- **User Management**: Account creation and profile management for students and tutors, allowing personalized user experiences.
 - **Responsive Design**: Optimized for mobile, tablet, and desktop, ensuring users can access the platform from any device.
-- **Email Notifications**: Automated email confirmations and reminders for scheduled sessions and upcoming payments.
-- **SEO Optimized**: Enhanced for search engines with server-side rendering (Next.js), ensuring high search rankings and better discoverability.
-- **Scalable Deployment**: Hosted on AWS or Google Cloud Platform for scalable, high-performance delivery with global reach.
+- **Email Notifications**: Automated email confirmations and reminders for scheduled sessions and payments.
+- **Scalable Deployment**: Built with Go and React (Vite), ensuring fast, high-performance delivery and ease of scaling.
+- **Atomic Session Management**: Handle session booking, cancellations, and payments seamlessly with error handling for no-shows and reschedules.
 
 ## Tech Stack
 
 ### Front-End
 
-- **React**: For building a responsive and interactive user interface.
-- **TypeScript**: For type safety and better developer experience.
-- **Redux Toolkit**: For managing global state and handling user sessions.
-- **React Router**: For seamless navigation and routing.
-- **Next.js**: For server-side rendering to enhance SEO and performance.
+- **React (Vite)**: For building a responsive and interactive user interface, bundled and served with Vite for fast development and optimized builds.
+- **JavaScript**: Core language for building React components and logic.
+- **React Router**: For handling routing and navigation within the app.
+- **Vite**: A blazing-fast build tool that serves the React app in development and production.
+- **Axios**: For handling HTTP requests to the backend API.
+- **CSS Modules** or **Tailwind CSS**: For styling the app with scoped or utility-first CSS.
 
 ### Back-End
 
-- **Node.js** with **TypeScript**: For server-side scripting and type safety.
-- **Express.js**: For building a RESTful API.
-- **PostgreSQL** with **TypeORM**: For relational data management, including user accounts and session scheduling.
+- **Go (Golang)**: Backend built with Go for high performance, concurrency handling, and scalability.
+- **Gin**: A fast, lightweight HTTP web framework for building the API.
+- **PostgreSQL**: Relational database for managing user accounts, session data, and payment records.
 
 ### API
 
-- **REST API**: For handling client-server communication.
+- **REST API**: A RESTful API built with Go and Gin for handling client-server communication.
+- **Stripe API**: For handling secure payments, refunds, and session payment policies (no-shows, cancellations, etc.).
+- **Calendly API**: For managing tutor availability and scheduling student appointments.
 
-### Scheduling and Integration
+### Scheduling and Payment Integration
 
-- **Google Calendar API**: For syncing tutor availability and scheduling student appointments.
-
-### Payment Integration
-
+- **Calendly**: For scheduling and managing tutor-student sessions.
 - **Stripe**: For secure online payment processing.
 
 ### Authentication
 
 - **JWT (JSON Web Tokens)**: For secure, stateless user authentication.
-- **OAuth 2.0** (Optional): For integrating social login options like Google or Facebook.
 
 ### CI/CD and Deployment
 
 - **GitHub Actions**: For automated testing, building, and deployment.
-- **Docker**: For containerization to ensure consistent environment setup.
-- **AWS Elastic Beanstalk** (or **Google Cloud Platform**): For scalable, high-performance deployment and management.
+- **Docker**: Containerization of both backend and frontend for consistent deployment environments.
+- **Google Cloud Run**: For deploying the Go backend, providing scalable and serverless deployment.
+- **Vercel** or **Netlify**: For deploying the React frontend for fast, globally distributed content delivery.
 
 ### Testing
 
-- **Jest**: For unit and integration testing of both backend and frontend.
-- **React Testing Library**: For testing React components.
-- **Supertest**: For API endpoint testing.
+- **Go Testing**: For testing backend business logic and API endpoints.
+- **Jest**: For unit and integration testing of the frontend.
+- **React Testing Library**: For testing React components and UI behavior.
+- **Supertest**: For API testing from the frontend during development.
 
 ## Usage
 
-1. **Sign Up**: Register as a student or tutor to start using the platform.
-2. **Set Availability**: Tutors can set their availability, which is synced with Google Calendar.
-3. **Book Sessions**: Students can view tutor availability in real-time and book sessions directly.
-4. **Make Payments**: Securely pay for sessions using Stripe, with options for one-time or package-based payments.
-5. **Receive Notifications**: Get automated email confirmations and reminders for scheduled sessions and payments.
+### Running Locally
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/your-repo/tutorlink
+   cd tutorlink
+   ```
+
+2. **Run the backend**:
+
+   - Navigate to the backend directory:
+     ```bash
+     cd backend
+     ```
+   - Ensure Go is installed, then run:
+     ```bash
+     go run cmd/api/main.go
+     ```
+
+3. **Run the frontend**:
+
+   - Navigate to the frontend directory:
+     ```bash
+     cd frontend
+     ```
+   - Install dependencies and start the Vite development server:
+     ```bash
+     npm install
+     npm run dev
+     ```
+
+4. **Access the app**:
+   - Frontend: `http://localhost:3000`
+   - Backend (API): `http://localhost:8080/api`
+
+### Docker (Optional)
+
+You can also run both the backend and frontend using Docker:
+
+1. **Build and run using `docker-compose`**:
+   ```bash
+   docker-compose up --build
+   ```
+
+This will start both the frontend and backend in containers.
 
 ## License
 
