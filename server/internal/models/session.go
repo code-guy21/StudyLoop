@@ -11,4 +11,5 @@ type Session struct {
 	StudentName string `gorm:"not null"`
 	ScheduledAt time.Time `gorm:"not null"`
 	Status string `gorm:"not null"`
+	ZoonLink string `gorm:"not null"`
 }
