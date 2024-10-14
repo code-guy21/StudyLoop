@@ -1,23 +1,29 @@
 package main
 
 import( 
-	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/gin"
-	"github.com/code-guy21/TutorLink/server/internal/repositories"
+	"log"
+	"github.com/code-guy21/TutorLink/server/internal/app"
+	"github.com/code-guy21/TutorLink/server/internal/pkg"
+	"github.com/code-guy21/TutorLink/server/internal/app/models"
 )
 
 func main(){
-	repositories.InitDatabse()
+	config, err := pkg.LoadConfig()
 
-	r := gin.Default()
+	if err != nil {
+		log.Fatalf("Failed to load config: %v", err)
+	}
 
-	r.Use(cors.Default())
+	db, err := pkg.InitDB(config)
 
-	r.GET("/api", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Welcome to the TutorLink API",
-		})
-	})
+	if err != nil {
+		log.Fatalf("Failed to connect to the database: %v", err)
+	}
+
+	db.AutoMigrate(&models.Tutor{})
+
+	if err := app.Run(config); err != nil {
+		log.Fatalf("Failed to run the application: %v", err)
+	}
 	
-	r.Run(":8080")
 }
