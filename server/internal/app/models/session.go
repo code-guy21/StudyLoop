@@ -7,9 +7,12 @@ import (
 
 type Session struct {
 	gorm.Model
-	TutorID uint `gorm:"not null"`
-	StudentName string `gorm:"not null"`
-	ScheduledAt time.Time `gorm:"not null"`
-	Status string `gorm:"not null"`
-	ZoonLink string `gorm:"not null"`
+	TutorID uint `json:"tutor_id"`
+	StartTime time.Time `json:"start_time"`
+	StudentID  uint      `json:"student_id"`    
+    Student    Student   `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+	EndTime time.Time `json:"end_time"`
+	Status string `json:"string"`
+	PaymentID string `json:"payment_id"`
+	ZoomLink string `json:"zoom_link"`
 }

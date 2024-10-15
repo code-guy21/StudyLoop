@@ -6,8 +6,9 @@ import (
 
 type Payment struct {
 	gorm.Model
-	SessionID uint
-	Amount int64 `gorm:"not null"`
-	Status string `gorm:"not null"`
-	StripeID string `gorm:"not null"`
+	SessionID uint `json:"sesson_id"`
+	Amount float64 `json:"amount"`
+	Currency string `json:"currency"`
+	Status string `json:"status"`
+	StripeID string `json:"stripe_id"`
 }

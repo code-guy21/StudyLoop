@@ -19,7 +19,7 @@ func main(){
 	
 	log.Println("Database connection established")
 
-	db.AutoMigrate(&models.Tutor{})
+	db.AutoMigrate(&models.Tutor{}, &models.Student{}, &models.Session{}, &models.Payment{})
 
 	if err := app.Run(config,db); err != nil {
 		log.Fatalf("Failed to run the application: %v", err)
