@@ -18,7 +18,9 @@ func NewTutorHandler(db *gorm.DB) *TutorHandler {
 func (h *TutorHandler) GetTutorProfile(c *gin.Context) {
 	var tutor models.Tutor
 
-	if err := h.db.First(&tutor).Error; err != nil {
+	tutorID := c.Param("id")
+
+	if err := h.db.First(&tutor, tutorID).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Tutor not found"})
 		return
 	}

@@ -8,6 +8,15 @@ import (
 
 func InitRoutes(router *gin.Engine, db *gorm.DB) {
 	tutorHandler := handlers.NewTutorHandler(db)
+	sessionHandler := handlers.NewSessionHandler(db)
+	paymentHandler := handlers.NewPaymentHandler(db)
 
-	router.GET("/tutor", tutorHandler.GetTutorProfile)
+	router.GET("/tutor/:id", tutorHandler.GetTutorProfile)
+
+	router.GET("/sessions", sessionHandler.GetSessions)
+	router.POST("/sessions", sessionHandler.CreateSession)
+	router.PUT("/sessions/:id/cancel", sessionHandler.CancelSession)
+
+	router.POST("/payments", paymentHandler.CreatePayment)
+	router.POST("/webhooks/stripe", paymentHandler.HandleWebhook)
 }
