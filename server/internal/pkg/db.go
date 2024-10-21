@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"log"
 )
 
 func InitDB(config *Config) (*gorm.DB, error) {
@@ -13,8 +14,10 @@ func InitDB(config *Config) (*gorm.DB, error) {
 		config.DatabaseUser,
 		config.DatabasePassword,
 		config.DatabaseName,
-		config.DatabasePort,		
+		config.DatabasePort,
 	)
+
+	log.Println(dsn)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 

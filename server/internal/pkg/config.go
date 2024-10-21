@@ -29,6 +29,8 @@ func LoadConfig() (*Config, error){
 		DatabasePort: getEnv("DATABASE_PORT", "5432"),
 	}
 
+	log.Printf("Loaded config: %v\n", config)
+
 	return config, nil
 
 }
