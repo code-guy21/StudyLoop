@@ -1,11 +1,28 @@
-APP_NAME = tutorlink-api
-CMD_DIR = cmd
+.PHONY: run build test docker-up docker-down migrate-up migrate-down
+
+BINARY_NAME=tutorlink
 
 run:
-	go run $(CMD_DIR)/api/main.go
+	@go run ./cmd/api
 
 build:
-	go build -o ${APP_NAME} ${CMD_DIR}/api/main.go
+	@go build -o bin/${BINARY_NAME} ./cmd/api
 
-seed:
-	go run $(CMD_DIR)/seeder/seeder.go
+test:
+	@go test -v ./...
+
+docker-up:
+	@docker-compose up -d
+
+docker-down:
+	@docker-compose down
+
+migrate-up:
+	@migrate -path migrations -database "postgres://postgres:postgres@localhost:5432/tutorlink?sslomode=disable" up
+
+migrate-down:
+	@migrate -path migrations -database "postgres://posttgres:postgres@localhost:5432/tutorlink?sslmode=disable" down
+
+deps:
+	@go mod download
+	@go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
