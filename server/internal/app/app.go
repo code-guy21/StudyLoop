@@ -7,6 +7,7 @@ import (
 	"gorm.io/driver/postgres"
 	"github.com/spf13/viper"
 	"github.com/code-guy21/TutorLink/server/internal/handlers"
+	"github.com/code-guy21/TutorLink/server/internal/domain/models"
 )
 
 type App struct {
@@ -72,6 +73,10 @@ func initDB() (*gorm.DB, error) {
 
 	if err != nil {
 		return nil, fmt.Errorf("error connecting to database: %w", err)
+	}
+
+	if err := db.AutoMigrate(&models.Session{}, &models.Payment{}); err != nil{
+		return nil, fmt.Errorf("error migrating database: %w", err)
 	}
 
 	return db, nil
