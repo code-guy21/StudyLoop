@@ -26,6 +26,8 @@ type Session struct {
 	Status SessionStatus `gorm:"type:session_status;not null;default:'scheduled'"`
 	CalendlyEventID string `gorm:"type:varchar(255);uniqueIndex"`
 
+	Payment *Payment `gorm:"foreignKey:SessionID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+
 	CancelledAt         *time.Time           `gorm:"default:null"`
     RefundAmount        *int64             
     StudentJoinedAt     *time.Time           `gorm:"default:null"`
