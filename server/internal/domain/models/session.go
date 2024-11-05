@@ -23,7 +23,7 @@ type Session struct {
 	BookingTime time.Time `gorm:"not null"`
 	EndTime time.Time `gorm:"not null"`
 	ZoomLink string `gorm:"type:varchar(255)"`
-	Status SessionStatus `gorm:"type:session_status;not null;default:'scheduled'"`
+	Status SessionStatus `gorm:"type:varchar(50);not null;default:'scheduled'"`
 	CalendlyEventID string `gorm:"type:varchar(255);uniqueIndex"`
 
 	Payment *Payment `gorm:"foreignKey:SessionID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`

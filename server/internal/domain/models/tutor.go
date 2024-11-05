@@ -1,17 +1,20 @@
 package models
 
-// import (
-// 	"gorm.io/gorm"
-// 	"github.com/lib/pq"
-// )
+import (
+	"github.com/lib/pq"
+	"gorm.io/gorm"
+)
 
-// type Tutor struct {
-// 	gorm.Model
-// 	Name string `json:"name" gorm:"not null"` 
-// 	Bio string `json:"bio"` 
-// 	Subjects pq.StringArray `gorm:"type:text[]" json:"subjects"`
-// 	Email string `json:"email" gorm:"uniqueIndex;not null"`
-// 	Rate float64 `json:"rate" gorm:"not null"`
-// 	ProfilePic string `json:"profile_pic"`
-// 	Sessions []Session `gorm:"foreignKey:TutorID" json:"sessions"`
-// }
+type Tutor struct {
+	gorm.Model
+	Name string `gorm:"type:varchar(255);not null"` 
+	Bio string `gorm:"type:text`
+	Subjects pq.StringArray `gorm:"type:text[]" json:"subjects"`
+	Email string `gorm:"type:varchar(255);not null;unique"`
+	Rate int64 `gorm:"not null"`
+	IsAvailable bool `gorm:"default:true"`	
+	CalendlyURL string `gorm:"type:varchar(255)`
+	ZoomURL string `gorm:"type:varchar(255)"`
+	ProfilePic string `json:"profile_pic"`
+	Sessions []Session `gorm:"foreignKey:TutorID" json:"sessions"`
+}
