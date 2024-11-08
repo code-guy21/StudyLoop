@@ -1,0 +1,45 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Test Backend
+        working-directory: ./backend
+        run: go test ./...
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Test Frontend
+        working-directory: ./client
+        run: |
+          npm ci
+          npm test
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Backend
+        run: docker build -f docker/backend.Dockerfile -t tutorlink-api ./backend
+
+      - name: Build Frontend
+        run: docker build -f docker/frontend.Dockerfile -t tutorlink-web ./frontend
