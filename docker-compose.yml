@@ -3,7 +3,7 @@ version: '3.8'
 services:
   api:
     build:
-      context: ./backend
+      context: ./server
       dockerfile: Dockerfile
     ports:
       - '8080:8080'
@@ -14,19 +14,19 @@ services:
       - DB_NAME=tutorlink
       - REDIS_URL=redis:6379
     volumes:
-      - ../backend:/app
+      - ./server:/app
     depends_on:
       - postgres
       - redis
 
   frontend:
     build:
-      context: ./frontend
+      context: ./client
       dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - '3000:80'
     volumes:
-      - ../frontend:/app
+      - ./client:/app
       - /app/node_modules
     environment:
       - VITE_API_URL=http://localhost:8080

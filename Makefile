@@ -4,8 +4,8 @@ dev:
 	docker-compose up --build
 
 test:
-	cd backend && go test ./...
-	cd frontend && npm test
+	cd server && go test ./...
+	cd client && npm test
 
 build:
 	docker-compose build
@@ -13,7 +13,7 @@ build:
 deploy:
 	echo "Deployment configuration to be added"
 
-.PHONY migrate
+.PHONY: migrate
 
 migrate:
-	cd backend && go run cmd/migrate/main.go
+	cd server && go run cmd/migrate/main.go
