@@ -1,6 +1,6 @@
-# TutorLink
+# LearnLoop
 
-TutorLink is a custom-built tutoring platform that allows students to easily schedule tutoring sessions and make secure online payments. The platform provides a streamlined, user-friendly interface where users can view tutor availability in real-time, book sessions, and receive automated confirmations. Integrated with Stripe for secure payments and Calendly for scheduling, TutorLink ensures a seamless experience for both tutors and students.
+LearnLoop is a custom-built tutoring platform that allows students to easily schedule tutoring sessions and make secure online payments. The platform provides a streamlined, user-friendly interface where users can view tutor availability in real-time, book sessions, and receive automated confirmations. Integrated with Stripe for secure payments and Calendly for scheduling, TutorLink ensures a seamless experience for both tutors and students.
 
 ## Table of Contents
 
